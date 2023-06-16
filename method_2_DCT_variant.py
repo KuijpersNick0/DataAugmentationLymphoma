@@ -13,7 +13,7 @@ def method2dct(im):
     
     for channel in range(z):
         # Apply DCT
-        DCTim = dct(dct(im[:, :, channel], axis=0), axis=1)
+        DCTim = dct(dct(im[:, :, channel], axis=0, norm='ortho'), axis=1, norm='ortho')
         
         for riga in range(y):
             for colonna in range(x):
@@ -36,6 +36,6 @@ def method2dct(im):
                     DCTim[riga, colonna] += sigma * random_z
             
         # Inverse DCT
-        image[:, :, channel] = idct(idct(DCTim, axis=0), axis=1)
+        image[:, :, channel] = idct(idct(DCTim, axis=0, norm='ortho'), axis=1, norm='ortho')
     
     return image.astype(np.uint8)
